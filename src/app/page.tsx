@@ -34,7 +34,7 @@ export default async function Home() {
               Si ves algún error o quieres agregar algun evento, comunícate con{" "}
               <a
                 className='underline underline-offset-2 text-orange-500 font-semibold'
-                href='https://twitter.com/0xKoller'
+                href='https://x.com/messages/150496130-150496130?text=Hola,%20quiero%20agregar%20un%20evento%20a%20Tech%20Events%20Argy.'
               >
                 0xKoller.
               </a>
