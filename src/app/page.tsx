@@ -1,20 +1,34 @@
+"use client";
+import { Suspense, useEffect, useState } from "react";
 import TableProp from "../components/TableProp";
 
-export default async function Home() {
-  const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/api/events");
-  const { events } = await response.json();
+export default function Home() {
+  const [eventsToShow, setEventsToShow] = useState([]);
+  const fetchData = async () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+
+    const response = await fetch(
+      process.env.NEXT_PUBLIC_API_URL + "/api/events"
+    );
+    const { events } = await response.json();
+    const today = new Date();
+    const upcomingEvents = events
+      // @ts-expect-error
+      .filter((event) => parseDate(event.date) >= today)
+      // @ts-expect-error
+      .sort((a, b) => parseDate(a.date) - parseDate(b.date));
+    setEventsToShow(upcomingEvents);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   function parseDate(dateString: string) {
     const [day, month, year] = dateString.split("/").map(Number);
     return new Date(year, month - 1, day);
   }
-  const today = new Date();
 
-  const upcomingEvents = events
-    // @ts-expect-error
-    .filter((event) => parseDate(event.date) >= today)
-    // @ts-expect-error
-    .sort((a, b) => parseDate(a.date) - parseDate(b.date));
   // TypeScript 😡😡😡😡
   return (
     <main className='min-h-screen grid grid-cols-1  w-full place-items-center px-2 md:px-8'>
@@ -40,8 +54,9 @@ export default async function Home() {
           </ul>
         </div>
       </section>
-
-      <TableProp data={upcomingEvents} />
+      <Suspense fallback={<p>Cargando...</p>}>
+        {eventsToShow.length > 0 ? <TableProp data={eventsToShow} /> : null}
+      </Suspense>
     </main>
   );
 }
