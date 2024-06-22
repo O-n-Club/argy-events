@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import { Providers } from "./providers";
 import { Metadata } from "next";
 import "./styles/globals.css";
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Argy Tech Events",
