@@ -5,6 +5,19 @@ import Link from "next/link";
 export default async function Home() {
   const response = await fetch("http://localhost:3000/api/events");
   const { events } = await response.json();
+
+  function parseDate(dateString: string) {
+    const [day, month, year] = dateString.split("/").map(Number);
+    return new Date(year, month - 1, day);
+  }
+  const today = new Date();
+
+  const upcomingEvents = events
+    // @ts-expect-error
+    .filter((event) => parseDate(event.date) >= today)
+    // @ts-expect-error
+    .sort((a, b) => parseDate(a.date) - parseDate(b.date));
+  // TypeScript 😡😡😡😡
   return (
     <main className='min-h-screen grid grid-cols-1  w-full place-items-center px-2 md:px-8'>
       <section className='flex flex-col w-full px-2 md:w-1/2  my-2 mb-4 place-items-center place-content-center h-full gap-4'>
@@ -18,34 +31,19 @@ export default async function Home() {
           <ul className='list-disc'>
             <li>Haz clic en el nombre del evento para acceder al registro.</li>
             <li>
-              Si ves algún error, comunícate con{" "}
+              Si ves algún error o quieres agregar algun evento, comunícate con{" "}
               <a
                 className='underline underline-offset-2 text-orange-500 font-semibold'
                 href='https://twitter.com/0xKoller'
               >
-                0xKoller
+                0xKoller.
               </a>
             </li>
           </ul>
         </div>
       </section>
 
-      <TableProp data={events} />
-
-      <Link
-        className='
-  fixed bottom-5 right-5
-  bg-slate-500 w-16 h-16
-  rounded-full flex items-center
-  justify-center text-white
-  hover:bg-slate-600 transition-all duration-300 ease-in-out
-  font-bold text-3xl
-  opacity-50 hover:opacity-100
-  '
-        href='https://forms.gle/eJs2drRFpvBZVrcu5'
-      >
-        <Plus size={24} />
-      </Link>
+      <TableProp data={upcomingEvents} />
     </main>
   );
 }
