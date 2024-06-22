@@ -6,7 +6,6 @@ export default function Home() {
   const [eventsToShow, setEventsToShow] = useState([]);
   const fetchData = async () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-
     const response = await fetch(
       process.env.NEXT_PUBLIC_API_URL + "/api/events"
     );
