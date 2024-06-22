@@ -1,9 +1,7 @@
-import { Plus } from "lucide-react";
 import TableProp from "../components/TableProp";
-import Link from "next/link";
 
 export default async function Home() {
-  const response = await fetch("http://localhost:3000/api/events");
+  const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/api/events");
   const { events } = await response.json();
 
   function parseDate(dateString: string) {
