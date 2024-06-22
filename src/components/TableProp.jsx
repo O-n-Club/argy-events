@@ -25,33 +25,39 @@ const columns = [
   {
     header: "Fecha",
     accessorKey: "date",
+    size: 50,
   },
   {
     header: "Nombre",
     accessorKey: "title",
+    size: 100,
   },
   {
     header: "Descripción",
     accessorKey: "description",
+    size: 270,
   },
   {
     header: "Ciudad",
     accessorKey: "city",
+    size: 50,
   },
   {
     header: "Hora",
     accessorKey: "time",
+    size: 50,
   },
   {
     header: "Organiza",
     accessorKey: "organize",
+    size: 50,
   },
 ];
 
 function TableProp({ data }) {
   const [sorting, setSorting] = useState([]);
   const [filtering, setFiltering] = useState("");
-
+  const amountOfEvents = data.length;
   const table = useReactTable({
     data,
     columns,
@@ -64,9 +70,17 @@ function TableProp({ data }) {
       globalFilter: filtering,
     },
     onSortingChange: setSorting,
+
     onGlobalFilterChange: setFiltering,
   });
   const size = 18;
+
+  const navigateTo = (link) => {
+    return () => {
+      window.location.href = link;
+    };
+  };
+
   return (
     <section className='w-full'>
       <Input
@@ -105,32 +119,36 @@ function TableProp({ data }) {
         </TableHeader>
         <TableBody>
           {table.getRowModel().rows.map((row, indexR) => (
-            <TableRow key={indexR}>
+            <TableRow onClick={navigateTo(data[indexR].link)} key={indexR}>
               {row.getVisibleCells().map((cell, indexC) => (
-                <TableCell key={indexC}>
-                  {indexC === 2 ? (
-                    <a href={data[indexR].link}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </a>
-                  ) : (
-                    flexRender(cell.column.columnDef.cell, cell.getContext())
-                  )}
+                <TableCell
+                  className='cursor-pointer hover:bg-gray-500 truncate'
+                  key={indexC}
+                >
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </TableCell>
               ))}
             </TableRow>
           ))}
         </TableBody>
       </Table>
-      <div className='flex place-content-center '>
-        <Button variant='outline' onClick={() => table.previousPage()}>
-          Anterior
-        </Button>
-        <Button variant='outline' onClick={() => table.nextPage()}>
-          Siguiente
-        </Button>
+
+      <div className='flex flex-col place-items-center gap-2 my-2'>
+        <div>
+          {amountOfEvents > 10 ? (
+            <>
+              <Button variant='outline' onClick={() => table.previousPage()}>
+                Anterior
+              </Button>
+              <Button variant='outline' onClick={() => table.nextPage()}>
+                Siguiente
+              </Button>
+            </>
+          ) : null}
+        </div>
+        <p>
+          {table.getRowModel().rows.length} de {amountOfEvents} eventos
+        </p>
       </div>
     </section>
   );
