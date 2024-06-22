@@ -54,9 +54,8 @@ export default function Home() {
           </ul>
         </div>
       </section>
-      <Suspense fallback={<p>Cargando...</p>}>
-        {eventsToShow.length > 0 ? <TableProp data={eventsToShow} /> : null}
-      </Suspense>
+
+      {eventsToShow.length > 0 ? <TableProp data={eventsToShow} /> : null}
     </main>
   );
 }
