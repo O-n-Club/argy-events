@@ -1,21 +1,24 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import CustomCard from "../components/CustomCard";
+import {events} from "../../exampleData"
 
 export default function Home() {
   const [eventsToShow, setEventsToShow] = useState([]);
-  const [registeredEvents, setRegisteredEvents] = useState([]);
+  const [registeredEvents, setRegisteredEvents] = useState<number>(0);
   const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`);
-    const { events } = await response.json();
+    // const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`);
+    // const { events } = await response.json();
+
     const today = new Date();
     const upcomingEvents = events
       // @ts-expect-error
       .filter((event) => parseDate(event.startDate) >= today)
       // @ts-expect-error
       .sort((a, b) => parseDate(a.startDate) - parseDate(b.startDate));
+      // @ts-expect-error
     setEventsToShow(upcomingEvents);
     setRegisteredEvents(events.length);
   };
@@ -47,10 +50,10 @@ export default function Home() {
     );
 
   return (
-    <main className='min-h-screen grid grid-cols-1  w-full place-items-center px-2 md:px-8'>
-      <section className='flex flex-col w-full px-2 text-center  my-2 mb-4 place-items-center place-content-center h-full gap-4'>
+    <main className='min-h-screen grid grid-cols-1  w-full place-items-center px-2 lg:px-32 xl:px-60'>
+      <section className='flex flex-col w-full px-2 text-center my-2 mb-4 place-items-center place-content-center h-full gap-4'>
         <h1 className='text-4xl md:text-7xl font-bold '>Tech Events Argy</h1>
-        <div className='grid grid-cols-1 md:grid-cols-2 place-items-center md:w-1/2'>
+        <div className='grid grid-cols-1 gap-4 place-items-center md:w-1/2'>
           <p>
             Una recopilación, o intento, de todos los eventos tech en Argentina.
             Utiliza el buscador para encontrar eventos por organizador, fecha o
@@ -58,7 +61,7 @@ export default function Home() {
           </p>
           {loading ? null : (
             <p className='my-2 text-xl flex flex-col border-2 w-fit px-3 py-2 rounded-md shadow-lg'>
-              Eventos trackeados hasta el momento{" "}
+              Eventos trackeados hasta el momento:{" "}
               <span className='text-4xl font-bold'>{registeredEvents}</span>{" "}
             </p>
           )}
