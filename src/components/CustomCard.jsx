@@ -24,10 +24,12 @@ function CustomCard({ data }) {
             </h3>
           </div>
           <div className='rounded-full bg-primary px-2 py-1 text-xs font-medium text-primary-foreground'>
-            <p>{daysToEvent > 0 ? `En ${daysToEvent} dias` : "Hoy"}</p>
+            <p>{daysToEvent > 0 ? `En ${daysToEvent} días` : "Hoy"}</p>
           </div>
         </div>
-        <p className='text-muted'>{data.description}</p>
+        <p className='text-muted-foreground font-semibold'>
+          {data.description}
+        </p>
         <div className='flex items-center  text-sm font-medium text-muted-foreground'>
           <CalendarDaysIcon className='h-4 w-4' />
           <p className='m-2'>
