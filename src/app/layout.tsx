@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import { Libre_Franklin } from "next/font/google";
-import { Cormorant_Garamond } from "next/font/google";
 import { Providers } from "./providers";
 import { Metadata } from "next";
 import "./styles/globals.css";
@@ -32,6 +32,7 @@ export default function RootLayout({
         <Providers>
           <Header />
           {children}
+          <Footer />
         </Providers>
       </body>
     </html>

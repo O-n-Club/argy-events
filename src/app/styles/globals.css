@@ -89,9 +89,6 @@
 ::-webkit-scrollbar-thumb:hover {
   background-color: orange;
 }
-body {
-  font-family: var(--font-cormorant_garamond), serif;
-}
 
 h1,
 h2,

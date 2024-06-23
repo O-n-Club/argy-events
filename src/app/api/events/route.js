@@ -14,7 +14,7 @@ export const GET = async (req, res) => {
 
   const authClient = await auth.getClient();
   const spreadsheetId = process.env.GOOGLE_SHEETS_SPREADSHEET_ID;
-  const range = "EventosN!A:G";
+  const range = process.env.GOOGLE_SHEETS_RANGE;
 
   try {
     const response = await sheets.spreadsheets.values.get({

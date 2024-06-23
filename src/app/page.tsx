@@ -5,13 +5,10 @@ import CustomCard from "../components/CustomCard";
 export default function Home() {
   const [eventsToShow, setEventsToShow] = useState([]);
   const [registeredEvents, setRegisteredEvents] = useState([]);
-  const [loading, setLoading] = useState(true); // eslint-disable-line no-unused-vars
+  const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const response = await fetch(
-      process.env.NEXT_PUBLIC_API_URL + "/api/events"
-    );
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`);
     const { events } = await response.json();
     const today = new Date();
     const upcomingEvents = events
@@ -35,16 +32,9 @@ export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6); // You can adjust this value
 
-  // Calculate the index of the first and last item on the current page
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = eventsToShow.slice(indexOfFirstItem, indexOfLastItem);
-
-  // Change page handler
-  // @ts-expect-error
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  // Calculate total pages
   const totalPages = Math.ceil(eventsToShow.length / itemsPerPage);
 
   // TypeScript 😡😡😡😡
@@ -111,17 +101,6 @@ export default function Home() {
           </button>
         )}
       </div>
-      <footer className='w-full flex justify-center py-2 px-4 md:w-1/2'>
-        <p className='text-sm'>
-          Proyecto por{" "}
-          <a
-            className='underline underline-offset-2 text-orange-500 font-semibold'
-            href='https://github.com/O-n-Club'
-          >
-            O(n) Club.
-          </a>
-        </p>
-      </footer>
     </main>
   );
 }
