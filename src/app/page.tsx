@@ -13,9 +13,9 @@ export default function Home() {
     const today = new Date();
     const upcomingEvents = events
       // @ts-expect-error
-      .filter((event) => parseDate(event.date) >= today)
+      .filter((event) => parseDate(event.startDate) >= today)
       // @ts-expect-error
-      .sort((a, b) => parseDate(a.date) - parseDate(b.date));
+      .sort((a, b) => parseDate(a.startDate) - parseDate(b.startDate));
     setEventsToShow(upcomingEvents);
   };
 

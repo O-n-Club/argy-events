@@ -14,7 +14,7 @@ export const GET = async (req, res) => {
 
   const authClient = await auth.getClient();
   const spreadsheetId = process.env.GOOGLE_SHEETS_SPREADSHEET_ID;
-  const range = "Eventos!A:G";
+  const range = "EventosN!A:G";
 
   try {
     const response = await sheets.spreadsheets.values.get({
@@ -27,13 +27,14 @@ export const GET = async (req, res) => {
       return NextResponse.error(new Error("No data found"));
     }
     const events = rows.map((row) => ({
-      date: row[0],
-      title: row[1],
-      description: row[2],
-      city: row[3],
-      time: row[4],
-      organize: row[5],
-      link: row[6],
+      startDate: row[0],
+      endDate: row[1],
+      title: row[2],
+      description: row[3],
+      city: row[4],
+      time: row[5],
+      organize: row[6],
+      link: row[7],
     }));
     return NextResponse.json({ events });
   } catch (error) {

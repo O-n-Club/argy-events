@@ -11,11 +11,11 @@ function CustomCard({ data }) {
   };
 
   const daysToEvent = Math.floor(
-    (parseDate(data.date) - new Date()) / (1000 * 60 * 60 * 24)
+    (parseDate(data.startDate) - new Date()) / (1000 * 60 * 60 * 24)
   );
   return (
-    <Card className='group overflow-hidden rounded-xl shadow-lg transition-all hover:shadow-2xl'>
-      <CardContent className='p-4 md:p-6 h-full grid grid-cols-1 gap-3 grid-rows-6 place-content-around'>
+    <Card className='group overflow-hidden rounded-xl shadow-lg transition-all hover:shadow-2xl '>
+      <CardContent className='h-full grid grid-cols-1 gap-3 grid-rows-6 place-content-around'>
         <div className='flex items-center gap-2 justify-between'>
           <div className='flex flex-col'>
             <h2 className=' font-semibold'>{data.title}</h2>
@@ -31,7 +31,7 @@ function CustomCard({ data }) {
         <div className='flex items-center  text-sm font-medium text-muted-foreground'>
           <CalendarDaysIcon className='h-4 w-4' />
           <p className='m-2'>
-            {data.date} a las {data.time}
+            {data.startDate} - {data.endDate}
           </p>
         </div>
         <div className='flex items-center  text-sm font-medium text-muted-foreground'>
@@ -44,7 +44,7 @@ function CustomCard({ data }) {
           rel='noreferrer'
           className='text-primary font-medium hover:underline'
         >
-          Mas informacion
+          Más información
         </a>
       </CardContent>
     </Card>
