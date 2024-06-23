@@ -9,8 +9,8 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
-    // const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`);
-    // const { events } = await response.json();
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`);
+    const { events } = await response.json();
 
     const today = new Date();
     const upcomingEvents = events
@@ -18,7 +18,7 @@ export default function Home() {
       .filter((event) => parseDate(event.startDate) >= today)
       // @ts-expect-error
       .sort((a, b) => parseDate(a.startDate) - parseDate(b.startDate));
-      // @ts-expect-error
+
     setEventsToShow(upcomingEvents);
     setRegisteredEvents(events.length);
   };
