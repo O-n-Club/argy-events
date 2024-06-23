@@ -16,11 +16,6 @@ const libre_franklin = Libre_Franklin({
   display: "swap",
   variable: "--font-libre_franklin",
 });
-const cormorant_garamond = Cormorant_Garamond({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-cormorant_garamond",
-});
 
 export default function RootLayout({
   children,
@@ -31,10 +26,7 @@ export default function RootLayout({
     <html lang='es' suppressHydrationWarning>
       <body
         className={
-          libre_franklin.variable +
-          " " +
-          cormorant_garamond.variable +
-          " flex flex-col place-items-center"
+          libre_franklin.variable + " flex flex-col place-items-center"
         }
       >
         <Providers>
