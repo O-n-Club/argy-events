@@ -26,7 +26,7 @@ export default function RootLayout({
     <html lang='es' suppressHydrationWarning>
       <body
         className={
-          libre_franklin.variable + " flex flex-col place-items-center"
+          libre_franklin.variable + " flex flex-col place-items-center py-4"
         }
       >
         <Providers>

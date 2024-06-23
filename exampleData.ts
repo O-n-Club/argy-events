@@ -1,4 +1,15 @@
-export default events = [
+type EventType = {
+  startDate: string;
+  endDate: string;
+  city: string;
+  organize: string;
+  title: string;
+  description: string;
+  time: string;
+  link: string;
+};
+
+export const events: EventType[] = [
   {
     startDate: "16/9/2024",
     endDate: "16/9/2024",
