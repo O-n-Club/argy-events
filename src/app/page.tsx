@@ -58,7 +58,7 @@ export default function Home() {
           </p>
           {loading ? null : (
             <p className='my-2 text-xl flex flex-col border-2 w-fit px-3 py-2 rounded-md shadow-lg'>
-              Eventos siendo trackeados hasta el momento{" "}
+              Eventos trackeados hasta el momento{" "}
               <span className='text-4xl font-bold'>{registeredEvents}</span>{" "}
             </p>
           )}

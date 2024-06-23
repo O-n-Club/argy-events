@@ -36,6 +36,7 @@ export const GET = async (req, res) => {
       organize: row[6],
       link: row[7],
     }));
+
     return NextResponse.json({ events });
   } catch (error) {
     return NextResponse.error(error);

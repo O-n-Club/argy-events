@@ -1,21 +1,20 @@
 import { CalendarDaysIcon, MapPinIcon } from "lucide-react";
 
 import React from "react";
-import { Card, CardContent } from "./ui/card";
 
 function CustomCard({ data }) {
   const parseDate = (dateString) => {
     const [day, month, year] = dateString.split("/").map(Number);
-    // Note: Month is 0-indexed, so subtract 1
     return new Date(year, month - 1, day);
   };
 
   const daysToEvent = Math.floor(
     (parseDate(data.startDate) - new Date()) / (1000 * 60 * 60 * 24)
   );
+
   return (
-    <Card className='group overflow-hidden rounded-xl shadow-lg transition-all hover:shadow-2xl '>
-      <CardContent className='h-full grid grid-cols-1 gap-3 grid-rows-6 place-content-around'>
+    <div className='group overflow-hidden rounded-md px-2 py-2 shadow-lg transition-all hover:shadow-2xl border-2'>
+      <div className='h-full grid grid-cols-1 gap-3 grid-rows-6 place-content-around'>
         <div className='flex items-center gap-2 justify-between'>
           <div className='flex flex-col'>
             <h2 className=' font-semibold'>{data.title}</h2>
@@ -30,13 +29,13 @@ function CustomCard({ data }) {
         <p className='text-muted-foreground font-semibold'>
           {data.description}
         </p>
-        <div className='flex items-center  text-sm font-medium text-muted-foreground'>
+        <div className='flex place-items-center  text-sm font-medium text-muted-foreground'>
           <CalendarDaysIcon className='h-4 w-4' />
           <p className='m-2'>
             {data.startDate} - {data.endDate}
           </p>
         </div>
-        <div className='flex items-center  text-sm font-medium text-muted-foreground'>
+        <div className='flex place-items-center  text-sm font-medium text-muted-foreground'>
           <MapPinIcon className='h-4 w-4' />
           <p className='m-2'>{data.city}</p>
         </div>
@@ -44,12 +43,12 @@ function CustomCard({ data }) {
           href={data.link}
           target='_blank'
           rel='noreferrer'
-          className='text-primary font-medium hover:underline'
+          className='text-primary font-medium underline underline-offset-2'
         >
           Más información
         </a>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }
 
