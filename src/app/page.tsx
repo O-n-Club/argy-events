@@ -50,7 +50,7 @@ export default function Home() {
     );
 
   return (
-    <main className='min-h-screen grid grid-cols-1  w-full place-items-center px-2 lg:px-32 xl:px-60'>
+    <main className='min-h-screen grid grid-cols-1  w-full place-items-center px-2 lg:px-32 xl:px-60 2xl:px-72'>
       <section className='flex flex-col w-full px-2 text-center my-2 mb-4 place-items-center place-content-center h-full gap-4'>
         <h1 className='text-4xl md:text-7xl font-bold '>Tech Events Argy</h1>
         <div className='grid grid-cols-1 gap-4 place-items-center md:w-1/2'>
