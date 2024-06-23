@@ -1,5 +1,6 @@
 import { google } from "googleapis";
 import { NextResponse } from "next/server";
+export const revalidate = 0;
 
 export const GET = async (req, res) => {
   const sheets = google.sheets("v4");
