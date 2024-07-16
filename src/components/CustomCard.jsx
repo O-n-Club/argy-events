@@ -13,7 +13,7 @@ function CustomCard({ data }) {
   );
 
   return (
-    <div className='group overflow-hidden rounded-md px-2 py-2 shadow-lg transition-all hover:shadow-2xl border-2'>
+    <div className='group overflow-hidden rounded-md px-4 py-4 shadow-lg transition-all hover:shadow-2xl border-2'>
       <div className='h-full grid grid-cols-1 gap-3 grid-rows-6 place-content-around'>
         <div className='flex items-center gap-2 justify-between'>
           <div className='flex flex-col'>
